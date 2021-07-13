@@ -13,8 +13,8 @@ def dynamic_loading(driver):
 
 def test_hidden_element(dynamic_loading):
     dynamic_loading.load_example("1")
-    assert dynamic_loading.finish_text_present()
+    assert dynamic_loading.finish_text_present(), "Dynamic loading finish text should be present for hidden element"
 
 def test_rendered_element(dynamic_loading):
     dynamic_loading.load_example("2")
-    assert dynamic_loading.finish_text_present()
+    assert dynamic_loading.finish_text_present(), "Dynamic loading finish text should be present for rendered element"

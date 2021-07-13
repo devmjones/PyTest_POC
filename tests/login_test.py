@@ -19,9 +19,9 @@ def login(driver):
 
 def test_valid_credentials(login):  # By naming the method test_*, Pytest will know it's a test method
     login.with_("tomsmith", "SuperSecretPassword!")
-    assert login.success_message_present()
+    assert login.success_message_present(), "Login success message should be present"
 
-
-def test_invalid_credentials(login):
-    login.with_("tomsmith", "bad password")
-    assert login.failure_message_present()
+@pytest.mark.parametrize("username, password",[("tomsmith", "bad password"), ("",""), ("bad username", "SuperSecretPassword")])
+def test_invalid_credentials(login, username, password):
+    login.with_(username, password)
+    assert login.failure_message_present(), "Login failure message should be present"
