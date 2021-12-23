@@ -1,6 +1,7 @@
 import pytest
 import os
 from selenium import webdriver
+from chromedriver_py import binary_path
 from . import config
 
 
@@ -50,11 +51,7 @@ def driver(request):
         driver_ = webdriver.Remote(_url, capabilities)
     else:
         if config.browser == "chrome":
-            _chromedriver = os.path.join(os.getcwd(), 'vendor', 'chromedriver')
-            if os.path.isfile(_chromedriver):
-                driver_ = webdriver.Chrome(_chromedriver)
-            else:
-                driver_ = webdriver.Chrome()
+            driver_ = webdriver.Chrome(executable_path=binary_path)
         elif config.browser == "firefox":
             _geckodriver = os.path.join(os.getcwd(), 'vendor', 'geckodriver')
             if os.path.isfile(_geckodriver):
